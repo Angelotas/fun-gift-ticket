@@ -1,20 +1,14 @@
-// Botón inicial
 const startBtn = document.getElementById("startBtn");
 const intro = document.getElementById("intro");
 const ticket = document.getElementById("ticket");
 const music = document.getElementById("bg-music");
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
 
 startBtn.addEventListener("click", () => {
-  // Ocultar botón
   startBtn.classList.add("hide");
-
-  // Arrancar música
   music.play();
-
-  // Quitar blur del fondo
   intro.classList.add("clear");
-
-  // Cuando termine la transición del blur → mostrar ticket
   intro.addEventListener(
     "transitionend",
     () => {
@@ -24,7 +18,13 @@ startBtn.addEventListener("click", () => {
   );
 });
 
-// Botón "Lo tengo claro"
+// Configurar confeti en el canvas propio
+const confettiCanvas = document.getElementById("confetti-canvas");
+const myConfetti = confetti.create(confettiCanvas, {
+  resize: true,
+  useWorker: true,
+});
+
 document.getElementById("confirmBtn").addEventListener("click", () => {
   const checked = document.querySelectorAll('input[type="checkbox"]:checked');
 
@@ -33,21 +33,31 @@ document.getElementById("confirmBtn").addEventListener("click", () => {
   } else if (checked.length > 2) {
     alert("No más de dos, no abuses 😒");
   } else {
-    document.getElementById("message").classList.add("show");
+    // Rellenar lista de actividades elegidas en el popup
+    const selectedList = document.getElementById("selectedActivities");
+    selectedList.innerHTML = ""; // limpiar antes de rellenar
+    checked.forEach((cb) => {
+      const li = document.createElement("li");
+      li.textContent = cb.parentNode.textContent.trim();
+      selectedList.appendChild(li);
+    });
 
-    // 🎉 Confeti con canvas-confetti
+    // Mostrar popup
+    popup.classList.add("show");
+
+    // 🎉 Confeti sobre el popup
     const duration = 3 * 1000;
     const animationEnd = Date.now() + duration;
 
     (function frame() {
-      confetti({
-        particleCount: 4,
+      myConfetti({
+        particleCount: 5,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
       });
-      confetti({
-        particleCount: 4,
+      myConfetti({
+        particleCount: 5,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
@@ -58,4 +68,9 @@ document.getElementById("confirmBtn").addEventListener("click", () => {
       }
     })();
   }
+});
+
+// Cerrar popup
+closePopup.addEventListener("click", () => {
+  popup.classList.remove("show");
 });

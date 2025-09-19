@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Gift Experience Ticket</title>
+    <title>Ticket de Regalo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
+<!-- Canvas para confeti en primer plano -->
+<canvas id="confetti-canvas"></canvas>
 
 <body>
 
@@ -15,40 +18,36 @@
 
     <!-- Botón inicial -->
     <div class="start-btn" id="startBtn">
-        Pulsa aquí para descubrir tu regalo
+        ▶ Dale al play para descubrir tu regalo
     </div>
 
     <!-- Ticket oculto -->
     <div class="ticket" id="ticket">
-        <h1>🎁 Gift Ticket</h1>
-        <h2>Choose Your Adventure!</h2>
+        <h1>🎁 Ticket de Regalo</h1>
+        <h2>¡Elige tu aventura!</h2>
 
-        <p>This voucher lets you pick <strong>up to 2 activities</strong>:</p>
+        <p>Este ticket te permite escoger <strong>hasta 2 actividades</strong>:</p>
         <div class="activities">
-            <label><input type="checkbox" name="activity"> Indoor Skydiving</label>
-            <label><input type="checkbox" name="activity"> Electric Motorbikes (Oasiz)</label>
+            <label><input type="checkbox" name="activity"> Túnel de viento</label>
+            <label><input type="checkbox" name="activity"> Motos eléctricas (Oasiz)</label>
             <label><input type="checkbox" name="activity"> Mario Kart (Oasiz)</label>
             <label><input type="checkbox" name="activity"> Airsoft</label>
             <label><input type="checkbox" name="activity"> VR Zero Latency</label>
-            <label><input type="checkbox" name="activity"> Wipeout Challenge (Humour Amarillo)</label>
+            <label><input type="checkbox" name="activity"> Humor Amarillo</label>
         </div>
 
         <div class="names">
-            <strong>From:</strong>
+            <strong>De parte de:</strong><br>
             Patri • Andrés • JR • Carlos • Ángel
         </div>
 
         <div class="footer">
-            Date and activities will be chosen by the guest.<br>
-            Valid for up to 2 activities.
+            La fecha y actividades las eliges tú.<br>
+            Válido para hasta 2 actividades.
         </div>
 
         <div class="actions">
             <button id="confirmBtn">Lo tengo claro ✅</button>
-        </div>
-
-        <div class="message" id="message">
-            🎉 ¡Compártelo con tus amigos y a buscar fechas!
         </div>
     </div>
 
@@ -56,6 +55,16 @@
     <audio id="bg-music">
         <source src="assets/audio/music.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <img src="assets/img/happy.gif" alt="Cumpleañero" class="popup-img">
+            <h3>Has elegido:</h3>
+            <ul id="selectedActivities"></ul>
+            <p>🎉 ¡Compártelo con tus amigos y a buscar fecha!</p>
+        </div>
+    </div>
 
     <!-- Librería confeti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>

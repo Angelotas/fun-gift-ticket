@@ -1,101 +1,211 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    overflow: hidden;
-  }
-  
-  /* Fondo inicial borroso */
-  .intro {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url("../assets/img/background.jpg") center/cover no-repeat;
-    filter: blur(25px);
-    transition: filter 3s ease-in;
-    z-index: 0;
-  }
-  .intro.clear {
-    filter: blur(0);
-  }
-  
-  /* Botón inicial */
-  .start-btn {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 20px 30px;
-    border-radius: 12px;
-    font-size: 1.4em;
-    cursor: pointer;
-    z-index: 2;
-    transition: opacity 1s ease-in;
-  }
-  .start-btn.hide {
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* para que no bloquee clics */
+  z-index: 1000; /* más alto que el popup */
+}
+
+/* Fondo inicial borroso */
+.intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/img/background.jpg") center/cover no-repeat;
+  filter: blur(12px);
+  transition: filter 3s ease-in;
+  z-index: 0;
+}
+.intro.clear {
+  filter: blur(0);
+}
+
+/* Botón inicial */
+.start-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 1.4em;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 1s ease-in;
+}
+.start-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ticket */
+/* Ticket */
+.ticket {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px dashed #000;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 88%; /* margen lateral */
+  padding: 20px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 2s ease-in;
+  z-index: 1;
+}
+
+.ticket.show {
+  opacity: 1;
+}
+
+/* Lista de actividades en popup */
+.popup-content h3 {
+  margin: 10px 0 8px;
+  font-size: 1.1em;
+  color: #e53935;
+}
+#selectedActivities {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+#selectedActivities li {
+  margin: 4px 0;
+  font-size: 0.95em;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #e53935;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.activities label {
+  display: block;
+  margin-bottom: 10px;
+}
+.names {
+  margin-top: 20px;
+  text-align: center;
+}
+.footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  text-align: center;
+  color: #444;
+}
+.actions {
+  text-align: center;
+  margin-top: 20px;
+}
+button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+button:hover {
+  background: #388e3c;
+}
+.message {
+  opacity: 0;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #1b5e20;
+  font-weight: bold;
+  transition: opacity 1s ease-in;
+}
+.message.show {
+  opacity: 1;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.popup.show {
+  display: flex;
+  animation: fadeIn 0.5s ease-in;
+}
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  animation: bounceIn 0.6s ease;
+}
+.popup-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+.popup button {
+  margin-top: 10px;
+  background: #4caf50;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+.popup button:hover {
+  background: #388e3c;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    pointer-events: none;
   }
-  
-  /* Ticket */
-  .ticket {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.9);
-    border: 3px dashed #000;
-    border-radius: 16px;
-    max-width: 480px;
-    width: 88%;
-    padding: 20px;
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
-    opacity: 0;
-    transition: opacity 2s ease-in;
-    z-index: 1;
-  }
-  .ticket.show {
+  to {
     opacity: 1;
   }
-  
-  h1 {
-    text-align: center;
-    color: #e53935;
+}
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.7);
   }
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  60% {
+    transform: scale(1.1);
   }
-  .activities label {
-    display: block;
-    margin-bottom: 10px;
+  100% {
+    transform: scale(1);
   }
-  .names {
-    margin-top: 20px;
-    text-align: center;
-  }
-  .footer {
-    margin-top: 20px;
-    font-size: 0.9em;
-    text-align: center;
-    color: #444;
-  }
-  .actions {
-    text-align: center;
-    margin-top: 20px;
-  }
-  button {
-    background: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-  }
-  button:hover { background: #388e3c; }
-  .message {
-    opacity: 0;
-    text-align:
-  
+}
