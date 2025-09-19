@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gift Experience Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Fondo con blur -->
+    <div class="intro" id="intro"></div>
+
+    <!-- Botón inicial -->
+    <div class="start-btn" id="startBtn">
+        Pulsa aquí para descubrir tu regalo
+    </div>
+
+    <!-- Ticket oculto -->
+    <div class="ticket" id="ticket">
+        <h1>🎁 Gift Ticket</h1>
+        <h2>Choose Your Adventure!</h2>
+
+        <p>This voucher lets you pick <strong>up to 2 activities</strong>:</p>
+        <div class="activities">
+            <label><input type="checkbox" name="activity"> Indoor Skydiving</label>
+            <label><input type="checkbox" name="activity"> Electric Motorbikes (Oasiz)</label>
+            <label><input type="checkbox" name="activity"> Mario Kart (Oasiz)</label>
+            <label><input type="checkbox" name="activity"> Airsoft</label>
+            <label><input type="checkbox" name="activity"> VR Zero Latency</label>
+            <label><input type="checkbox" name="activity"> Wipeout Challenge (Humour Amarillo)</label>
+        </div>
+
+        <div class="names">
+            <strong>From:</strong>
+            Patri • Andrés • JR • Carlos • Ángel
+        </div>
+
+        <div class="footer">
+            Date and activities will be chosen by the guest.<br>
+            Valid for up to 2 activities.
+        </div>
+
+        <div class="actions">
+            <button id="confirmBtn">Lo tengo claro ✅</button>
+        </div>
+
+        <div class="message" id="message">
+            🎉 ¡Compártelo con tus amigos y a buscar fechas!
+        </div>
+    </div>
+
+    <!-- Música -->
+    <audio id="bg-music">
+        <source src="assets/audio/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Librería confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
